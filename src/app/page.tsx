@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Container from "@/components/Container";
+import Hero from "@/components/Hero";
 import Card from "@/components/Card";
 import Button from "@/components/Button";
 import Textarea from "@/components/Textarea";
@@ -47,16 +48,12 @@ export default function Home() {
     <main className="flex-1">
       <Container>
         <div className="flex flex-col gap-6">
-          {/* Title */}
-          <div className="flex flex-col gap-2">
-            <Badge>STARTER</Badge>
-            <h1 className="text-2xl font-bold sm:text-3xl">Hackathon Starter</h1>
-            {/* Description */}
-            <p className="text-sm text-muted">
-              汎用の1画面フロー: 入力 → 実行 → Loading → Result。
-              当日はテーマに合わせてこの画面を作り替えます。
-            </p>
-          </div>
+          {/* First View */}
+          <Hero
+            eyebrow="STARTER"
+            title="Hackathon Starter"
+            description="汎用の1画面フロー: 入力 → 実行 → Loading → Result。当日はテーマに合わせてこの画面を作り替えます。"
+          />
 
           {/* Input / Action */}
           <Card>
