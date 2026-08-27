@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // サンプル置き場はビルド・lint対象外
+    "templates/**",
   ]),
 ]);
 
