@@ -37,6 +37,11 @@ Login / Sign Up / Authentication / Admin / Profile / Settings / History / 課金
 - 15:45–15:50にDemo A/Bを固定して記入
 - 発表準備はこのシートを`prompts/05`に渡して「編集するだけ」
 
+## 発表スライド
+- `slides/slides.html` = みらいスタジオ・スライドキット規約準拠の3枚固定テンプレ(1280×720、ロゴ埋め込み済み)
+- 16:10以降に `__XXX__` プレースホルダを置換するだけ。**構造・CSS・ロゴは変えない**
+- 見出しは主張文。「〜ではなく〜」対比は3枚で最大1回。形容詞で盛らない。CURRENT STATUSは正直に。社名は「みらいスタジオ」
+
 ## デプロイ
 - `./deploy.sh` = ローカル `npm run build` 検証 → `app.zip` 生成 → Hanamii「再デプロイ」へ
 - 環境変数は保存後「**AppRunに設定を反映**」を押す(保存だけでは反映されない)
