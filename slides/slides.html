@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <title>__PRODUCT__ — 札幌すごいAIハッカソン 2026夏</title>
 <!--
-  ハッカソン発表スライド(3枚固定)テンプレート
+  ハッカソン発表スライド(基本3枚+技術解説1枚)テンプレート
   - みらいスタジオ スライドデザイン規約 準拠(1280x720 / navy+金1点 / 本文17px・見出し28px / border-left禁止)
   - 当日16:10以降、__XXX__ プレースホルダをTHEME_DECISION_SHEETの内容で置換するだけ(構造は変えない)
   - 見出し(h2.msg)は必ず「主張文」にする(ラベル見出し禁止)
@@ -38,6 +38,7 @@
   .slide:nth-of-type(1) .kicker::before { content:"🧭"; }
   .slide:nth-of-type(2) .kicker::before { content:"💡"; }
   .slide:nth-of-type(3) .kicker::before { content:"🚀"; }
+  .slide:nth-of-type(4) .kicker::before { content:"⚙️"; }
 
   /* ピッチの主役: 巨大な一言 */
   .hero { display:flex; flex-direction:column; gap:8px; }
@@ -74,8 +75,15 @@
   .main-card .sub-p { font-size:14.5px; color:var(--mute); line-height:1.6; margin-top:auto; }
   .side { flex:1; display:flex; flex-direction:column; gap:12px; min-width:0; }
   .side-item { background:rgba(255,255,255,.05); border:1px solid var(--line); border-radius:14px; padding:13px 16px; }
-  .side-item .tag { display:inline-block; font-size:11px; font-weight:900; letter-spacing:.08em; color:#0c1030; background:var(--amber); border-radius:5px; padding:2px 8px; margin-bottom:6px; transform:rotate(-1.2deg); }
+  .arch .tag, .side-item .tag { display:inline-block; font-size:11px; font-weight:900; letter-spacing:.08em; color:#0c1030; background:var(--amber); border-radius:5px; padding:2px 8px; margin-bottom:6px; transform:rotate(-1.2deg); }
   .side-item p { font-size:14px; line-height:1.6; color:#cfd6f2; }
+
+  /* Slide4: 技術解説 */
+  .arch { background:rgba(255,255,255,.05); border:1px solid var(--line); border-radius:16px; padding:16px 22px; }
+  .arch p { font-size:18px; font-weight:700; color:#dfe4ff; line-height:1.6; font-family:ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .tech-grid { display:flex; gap:14px; flex:1; min-height:0; }
+  .tech-grid .side-item { flex:1; }
+  .tech-grid .side-item p { font-size:15px; }
 
   /* Slide3: デモの流れ */
   .flow { display:flex; gap:12px; align-items:stretch; }
@@ -191,6 +199,23 @@
     <span class="mini-i"><b class="cut">✂️ あえて削った</b> __CUT__ — __WHY_CUT__<!-- CORE EXPERIENCE優先の判断として --></span>
   </div>
   <div class="footer"><span>__PRODUCT__ — 札幌すごいAIハッカソン 2026夏 / GitHub: __GITHUB_URL__</span><span class="pg">03</span></div>
+</section>
+
+<!-- ============ Slide 4: 技術解説(任意・2分) ============ -->
+<section class="slide">
+  <div class="kicker">04 TECH — アーキテクチャ / 技術選定 / AIの使い方</div>
+  <div class="hero">
+    <p class="eyebrow">技術解説(任意・2分)</p>
+    <h2 class="punch">__TECH_PUNCH__<!-- 技術選定の主張を一言で。20字前後 --></h2>
+  </div>
+  <div class="arch"><span class="tag">アーキテクチャ</span><p>__TECH_ARCH__<!-- データの流れを1行で: USER → UI → ... → RESULT --></p></div>
+  <div class="tech-grid">
+    <div class="side-item"><span class="tag">技術選定</span><p>__TECH_STACK__<!-- スタックと「なぜそれだけで足りるか」 --></p></div>
+    <div class="side-item"><span class="tag">AIの使い方</span><p>__TECH_AI__<!-- プロダクト内AIの有無と理由/開発プロセスでの活用 --></p></div>
+    <div class="side-item"><span class="tag">公開・再現性</span><p>__TECH_DEPLOY__<!-- デプロイ構成と誰でも再現できること --></p></div>
+  </div>
+  <div class="big"><span class="lbl">TECH MESSAGE</span>__TECH_MESSAGE__<!-- 技術の締めの一言 --></div>
+  <div class="footer"><span>__PRODUCT__ — 札幌すごいAIハッカソン 2026夏 / GitHub: __GITHUB_URL__</span><span class="pg">04</span></div>
 </section>
 
 </body>

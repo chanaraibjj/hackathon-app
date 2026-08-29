@@ -1,47 +1,44 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Container from "@/components/Container";
 import Hero from "@/components/Hero";
 import Card from "@/components/Card";
 import Button from "@/components/Button";
 import Textarea from "@/components/Textarea";
 import Badge from "@/components/Badge";
-import Alert from "@/components/Alert";
-import Loading from "@/components/Loading";
-import { runLocalDemo } from "@/lib/demo";
-import type { DemoResult } from "@/types";
+import { judge, MY_NAME, type JudgeResult } from "@/lib/judge";
 
-type Status = "idle" | "loading" | "success" | "error";
+const SAMPLES = ["わかりました。", "検討します。", "承知しました。"];
 
 export default function Home() {
   const [input, setInput] = useState("");
-  const [status, setStatus] = useState<Status>("idle");
-  const [result, setResult] = useState<DemoResult | null>(null);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [result, setResult] = useState<JudgeResult | null>(null);
+  // 実行時のスナップショット。以降の入力変更はプレビューに反映しない
+  const [sent, setSent] = useState<{ text: string } | null>(null);
+  const [runId, setRunId] = useState(0);
+  const resultRef = useRef<HTMLDivElement>(null);
 
-  const canRun = input.trim().length > 0 && status !== "loading";
+  const canRun = input.trim().length > 0;
 
-  async function run() {
-    if (!canRun) return;
-    setStatus("loading");
-    setResult(null);
-    setErrorMessage("");
-    try {
-      const res = await runLocalDemo(input);
-      setResult(res);
-      setStatus("success");
-    } catch (e) {
-      setErrorMessage(e instanceof Error ? e.message : "不明なエラーが発生しました");
-      setStatus("error");
+  useEffect(() => {
+    if (runId > 0) {
+      resultRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     }
+  }, [runId]);
+
+  function run() {
+    const text = input.trim();
+    if (!text) return;
+    setResult(judge(text));
+    setSent({ text });
+    setRunId((n) => n + 1); // key更新でフェード演出を毎回リプレイ
   }
 
   function reset() {
     setInput("");
     setResult(null);
-    setErrorMessage("");
-    setStatus("idle");
+    setSent(null);
   }
 
   return (
@@ -50,9 +47,9 @@ export default function Home() {
         <div className="flex flex-col gap-6">
           {/* First View */}
           <Hero
-            eyebrow="STARTER"
-            title="Hackathon Starter"
-            description="汎用の1画面フロー: 入力 → 実行 → Loading → Result。当日はテーマに合わせてこの画面を作り替えます。"
+            eyebrow="顔を知る — わたし宛て専用の行間ミラー"
+            title="そっけなさプレビュー"
+            description="わたしに送る前のその返信、わたしのスマホでどう見えるか映します。行間を埋めるコストは、いつも受け取るわたしが払っています。送信前に30秒だけ、わたしの顔を知ってください。"
           />
 
           {/* Input / Action */}
@@ -65,54 +62,161 @@ export default function Home() {
               }}
             >
               <label className="flex flex-col gap-2 text-sm font-medium">
-                入力
+                わたしに送る前の返信
                 <Textarea
                   rows={3}
-                  placeholder="ここに何か入力してください(「エラー」と入れるとError表示を確認できます)"
+                  placeholder="例: わかりました。"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  disabled={status === "loading"}
                 />
               </label>
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="text-xs text-muted">サンプル:</span>
+                {SAMPLES.map((s) => (
+                  <button
+                    key={s}
+                    type="button"
+                    onClick={() => setInput(s)}
+                    className="rounded-full border border-border px-3 py-1 text-xs transition hover:bg-card"
+                  >
+                    {s}
+                  </button>
+                ))}
+              </div>
+              <div className="flex flex-wrap items-center gap-2 text-sm">
+                <span className="font-medium">宛先</span>
+                <Badge variant="neutral">{MY_NAME}(固定)</Badge>
+                <span className="text-xs text-muted">
+                  このアプリの宛先は、世界にたった1人だけです
+                </span>
+              </div>
               <div className="flex flex-wrap items-center gap-3">
                 <Button type="submit" disabled={!canRun}>
-                  実行する
+                  わたしの画面で見る
                 </Button>
-                {(status === "success" || status === "error") && (
+                {result && (
                   <Button type="button" variant="secondary" onClick={reset}>
-                    リセットして再実行
+                    リセット
                   </Button>
                 )}
               </div>
             </form>
           </Card>
 
-          {/* Loading */}
-          {status === "loading" && (
-            <Card>
-              <Loading label="実行しています..." />
-            </Card>
-          )}
-
-          {/* Error */}
-          {status === "error" && <Alert variant="error">{errorMessage}</Alert>}
-
           {/* Result */}
-          {status === "success" && result && (
-            <Card className="flex flex-col gap-3">
-              <div className="flex items-center gap-2">
-                <Badge variant="success">RESULT</Badge>
-                <h2 className="text-lg font-semibold">{result.title}</h2>
+          {result && sent && (
+            <div
+              key={runId}
+              ref={resultRef}
+              className="grid scroll-mt-4 gap-6 md:grid-cols-2"
+            >
+              {/* わたしのスマホ画面(WOWの本体) */}
+              <div
+                className="mx-auto w-full max-w-xs"
+                style={{ animation: "fade-up 0.4s ease-out both" }}
+              >
+                <div className="overflow-hidden rounded-[2rem] border border-border bg-background shadow-lg">
+                  {/* スマホのヘッダー */}
+                  <div className="border-b border-border bg-card px-4 py-3 text-center">
+                    <p className="text-xs text-muted">{MY_NAME}のスマホ</p>
+                    <p className="text-sm font-semibold">あなたとのトーク</p>
+                  </div>
+                  {/* トーク画面 */}
+                  <div className="flex min-h-64 flex-col gap-2 px-4 py-5">
+                    <div className="flex flex-col items-end gap-1">
+                      <div className="max-w-[85%] rounded-2xl rounded-br-sm bg-accent px-4 py-2.5 text-sm text-accent-foreground">
+                        {sent.text}
+                      </div>
+                      <span
+                        className="text-[10px] text-muted"
+                        style={{ animation: "fade-up 0.3s ease-out 0.6s both" }}
+                      >
+                        既読
+                      </span>
+                    </div>
+                    {/* わたしの内心バブル */}
+                    <div
+                      className="mt-6 self-start"
+                      style={{ animation: "fade-up 0.7s ease-out 1.4s both" }}
+                    >
+                      <div className="max-w-[95%] rounded-2xl border border-dashed border-border bg-card px-4 py-3 text-sm italic text-muted">
+                        {result.innerVoice}
+                      </div>
+                      <p className="mt-1 pl-2 text-[10px] text-muted">
+                        {MY_NAME}の内心
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <p className="text-sm text-muted">{result.description}</p>
-              <ul className="flex flex-col gap-1.5 text-sm">
-                {result.items.map((item) => (
-                  <li key={item} className="rounded-md bg-background px-3 py-2">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </Card>
+
+              {/* 冷たさ根拠+温めた代替案 */}
+              <div
+                className="flex flex-col gap-4"
+                style={{ animation: "fade-up 0.5s ease-out 2.2s both" }}
+              >
+                <Card className="flex flex-col gap-3">
+                  <div className="flex items-center gap-2">
+                    <Badge
+                      variant={
+                        result.level === 2
+                          ? "danger"
+                          : result.level === 1
+                            ? "neutral"
+                            : "success"
+                      }
+                    >
+                      冷たさ判定: {result.levelLabel}
+                    </Badge>
+                    <span className="text-xs text-muted">
+                      冷たさスコア {result.score} / 100
+                    </span>
+                  </div>
+                  {result.reasons.length > 0 ? (
+                    <ul className="flex flex-col gap-1.5 text-sm">
+                      {result.reasons.map((r) => (
+                        <li
+                          key={r.label}
+                          className="rounded-md bg-background px-3 py-2"
+                        >
+                          <span className="font-semibold text-danger">
+                            {r.label}
+                          </span>
+                          <span className="block text-xs text-muted">
+                            {r.detail}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="text-sm text-muted">
+                      冷たさの要素は見つかりませんでした。
+                    </p>
+                  )}
+                </Card>
+
+                {result.rewrite ? (
+                  <Card className="flex flex-col gap-3">
+                    <div>
+                      <Badge variant="success">温めた代替案</Badge>
+                    </div>
+                    <p className="rounded-md bg-background px-3 py-2 text-sm">
+                      {result.rewrite}
+                    </p>
+                    <p className="text-xs text-muted">
+                      同じ内容のまま、行間をわたしに押しつけない一言を足しました。
+                    </p>
+                  </Card>
+                ) : (
+                  <Card>
+                    <p className="text-sm">
+                      このままで十分あたたかい返信です。安心して送ってください。
+                      わたしも安心して受け取れます。
+                    </p>
+                  </Card>
+                )}
+              </div>
+            </div>
           )}
         </div>
       </Container>
