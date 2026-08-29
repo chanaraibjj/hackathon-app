@@ -17,7 +17,18 @@ export default function Home() {
   // 実行時のスナップショット。以降の入力変更はプレビューに反映しない
   const [sent, setSent] = useState<{ text: string } | null>(null);
   const [runId, setRunId] = useState(0);
+  const [copied, setCopied] = useState(false);
   const resultRef = useRef<HTMLDivElement>(null);
+
+  // 代替案も同じ判定エンジンに通し、改善の効果を数字で見せる
+  const rewriteScore = result?.rewrite ? judge(result.rewrite).score : null;
+
+  async function copyRewrite() {
+    if (!result?.rewrite) return;
+    await navigator.clipboard.writeText(result.rewrite);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
+  }
 
   const canRun = input.trim().length > 0;
 
@@ -47,9 +58,9 @@ export default function Home() {
         <div className="flex flex-col gap-6">
           {/* First View */}
           <Hero
-            eyebrow="顔を知る — わたし宛て専用の行間ミラー"
+            eyebrow="顔を知る — 送信前30秒のコミュニケーション改善サポート"
             title="そっけなさプレビュー"
-            description="わたしに送る前のその返信、わたしのスマホでどう見えるか映します。行間を埋めるコストは、いつも受け取るわたしが払っています。送信前に30秒だけ、わたしの顔を知ってください。"
+            description="わたしに送る前のその返信、受け取るわたしの画面でどう見えるかをプレビューします。伝わり方をたしかめて、同じ内容のまま、もっと伝わる返信に磨いてから送れます。送信前に30秒だけ、わたしの顔を見てみてください。"
           />
 
           {/* Input / Action */}
@@ -197,15 +208,32 @@ export default function Home() {
 
                 {result.rewrite ? (
                   <Card className="flex flex-col gap-3">
-                    <div>
+                    <div className="flex flex-wrap items-center gap-2">
                       <Badge variant="success">温めた代替案</Badge>
+                      {rewriteScore !== null && (
+                        <span className="text-xs text-muted">
+                          冷たさスコア {result.score} →{" "}
+                          <span className="font-semibold text-success">
+                            {rewriteScore}
+                          </span>
+                        </span>
+                      )}
                     </div>
                     <p className="rounded-md bg-background px-3 py-2 text-sm">
                       {result.rewrite}
                     </p>
-                    <p className="text-xs text-muted">
-                      同じ内容のまま、行間をわたしに押しつけない一言を足しました。
-                    </p>
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <p className="text-xs text-muted">
+                        同じ内容のまま、気持ちが伝わる一言を足しました。
+                      </p>
+                      <Button
+                        type="button"
+                        variant="secondary"
+                        onClick={copyRewrite}
+                      >
+                        {copied ? "コピーしました!" : "コピーして送る"}
+                      </Button>
+                    </div>
                   </Card>
                 ) : (
                   <Card>
