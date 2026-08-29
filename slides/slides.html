@@ -55,6 +55,7 @@
 
   /* 脇役の小ネタ(捨てた解釈・完成度など) */
   .mini { display:flex; flex-wrap:wrap; gap:6px 22px; align-items:baseline; font-size:13px; color:var(--mute); line-height:1.5; }
+  .mini.stack { flex-direction:column; align-items:flex-start; gap:5px; }
   .mini .mini-t { font-size:11px; font-weight:900; letter-spacing:.1em; color:#0c1030; background:var(--amber); border-radius:5px; padding:2px 8px; transform:rotate(-1.2deg); }
   .mini .mini-i b { color:#dfe4ff; font-weight:700; }
   .mini .ok { color:var(--cyan); font-weight:800; }
@@ -125,10 +126,10 @@
   </div>
   <p class="lead">__INTERPRETATION_FULL__<!-- 解釈の中身。テーマが現実のどんな現象として現れているか --></p>
   <div class="quote">__PHENOMENON__<!-- その現象が起きる具体的な日常の瞬間。誰が・いつ・どこで --></div>
-  <div class="mini">
+  <div class="mini stack">
     <span class="mini-t">捨てた解釈</span>
-    <span class="mini-i"><b>① __OTHER_OPTION_1__</b> — __WHY_CUT_1__<!-- 捨てた理由 --></span>
-    <span class="mini-i"><b>② __OTHER_OPTION_2__</b> — __WHY_CUT_2__<!-- 捨てた理由 --></span>
+    <span class="mini-i"><b>① __OTHER_OPTION_1__</b> __OTHER_OPTION_1_DESC__<!-- どんなアイデアだったか一言 --> <span class="cut">✂ __WHY_CUT_1__</span><!-- 捨てた理由 --></span>
+    <span class="mini-i"><b>② __OTHER_OPTION_2__</b> __OTHER_OPTION_2_DESC__<!-- どんなアイデアだったか一言 --> <span class="cut">✂ __WHY_CUT_2__</span><!-- 捨てた理由 --></span>
   </div>
   <div class="big"><span class="lbl">1 USER / 1 PROBLEM</span>__USER__は、__SITUATION__とき、<b>__PROBLEM__</b>に困っている。<!-- SITUATIONは「〜する」で終える --></div>
   <div class="footer"><span>__PRODUCT__ — 札幌すごいAIハッカソン 2026夏</span><span class="pg">01</span></div>
