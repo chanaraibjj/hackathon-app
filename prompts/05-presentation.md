@@ -64,6 +64,10 @@ Slide 3「体験 / デモ」= 実際の使い方(ユーザーストーリー)/ �
 
 ## 補足(余裕があれば)
 
+- AI画像: `slides/image-prompts.md` のプロンプトに当日のテーマ/プロダクトを埋めて画像生成 →
+  `slides/assets/theme.png` と `slides/assets/product.png` に保存 → slides.html内のコメントを外す。
+  **スライドは画像なしで完成している。16:20を過ぎたら画像はやらない**(発表準備優先)
+
 - 文言lint: `cd ../../miraistudio-slide-kit && uv run skills/natural-japanese/scripts/lint.py <可視テキストを抽出した.md>`
   → `antithesis_repetition`(対比反復)だけ潰す。`repeated_sentence_lead` は誤検出なので無視
 - PDF化: ブラウザ印刷(用紙1280×720)。テンプレに `print-color-adjust:exact` 設定済み
