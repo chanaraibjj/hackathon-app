@@ -91,6 +91,11 @@
   .footer { position:absolute; left:72px; right:72px; bottom:16px; display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--line); padding-top:8px; font-size:11px; color:#7d86ad; }
   .footer .pg { font-size:12px; font-weight:800; color:#c9bcff; }
 
+  /* ペイン写真(Slide1): assets/pain.png があれば右側に出る */
+  .painrow { display:flex; gap:24px; align-items:stretch; }
+  .paintext { flex:1; min-width:0; display:flex; flex-direction:column; gap:14px; }
+  .pain-photo { width:300px; max-height:215px; align-self:center; object-fit:cover; border-radius:16px; border:1px solid var(--line); transform:rotate(1.4deg); box-shadow:0 12px 32px rgba(0,0,0,.45); }
+
   /* AI生成画像スロット(任意)。無くてもレイアウトは完結する */
   .ai-hero { position:absolute; right:64px; top:76px; width:300px; border-radius:16px; border:1px solid var(--line); opacity:.95; }
   .ai-visual { width:100%; max-height:170px; object-fit:cover; border-radius:14px; border:1px solid var(--line); }
@@ -118,14 +123,19 @@
 <!-- ============ Slide 1: テーマ解釈 / 課題 ============ -->
 <section class="slide">
   <div class="kicker">01 INTERPRETATION — テーマ解釈 / 課題</div>
-  <!-- AI画像(任意): <img class="ai-hero" src="assets/theme.png" alt=""> -->
   <div class="hero">
     <p class="eyebrow">テーマ「__THEME__」を、こう捉えた</p>
     <h2 class="punch"><span class="grad">「__INTERPRETATION_SHORT__」</span></h2>
     <p class="why">__WHY_ONELINE__<!-- なぜこの解釈を選んだか、一文 --></p>
   </div>
-  <p class="lead">__INTERPRETATION_FULL__<!-- 解釈の中身。テーマが現実のどんな現象として現れているか --></p>
-  <div class="quote">__PHENOMENON__<!-- その現象が起きる具体的な日常の瞬間。誰が・いつ・どこで --></div>
+  <div class="painrow">
+    <div class="paintext">
+      <p class="lead">__INTERPRETATION_FULL__<!-- 解釈の中身。テーマが現実のどんな現象として現れているか --></p>
+      <div class="quote">__PHENOMENON__<!-- その現象が起きる具体的な日常の瞬間。誰が・いつ・どこで --></div>
+    </div>
+    <!-- ペイン写真: slides/assets/pain.png を置くと自動で表示される(無ければ消える) -->
+    <img class="pain-photo" src="assets/pain.png" alt="" onerror="this.remove()">
+  </div>
   <div class="mini stack">
     <span class="mini-t">捨てた解釈</span>
     <span class="mini-i"><b>① __OTHER_OPTION_1__</b> __OTHER_OPTION_1_DESC__<!-- どんなアイデアだったか一言 --> <span class="cut">✂ __WHY_CUT_1__</span><!-- 捨てた理由 --></span>

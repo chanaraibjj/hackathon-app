@@ -1,75 +1,64 @@
-# スライド用AI画像の生成プロンプト集(任意・時間が余ったときだけ)
+# スライド用AI画像の生成プロンプト集
 
-使い方:
-1. `{{ }}` を当日の内容で埋めて、画像生成AI(ChatGPT / Gemini など)に貼る
-2. 生成画像を `slides/assets/theme.png` / `slides/assets/product.png` として保存
-3. `slides.html` 内のコメント `<!-- AI画像(任意): ... -->` を外す
-   (Slide 1 = 右上に浮かぶ `ai-hero` / Slide 2 = 右カラム上の `ai-visual`)
-
-ルール:
-- **スライドは画像なしで完成している。16:20を過ぎたら画像はあきらめる**(発表準備を優先)
-- **画像内に文字を入れない**(AI画像の文字は崩れて安っぽくなる。文字はスライド側で出す)
-- スタイル指定は変えない(スライドのデザインと色を合わせてある)
+優先度: **①ペイン写真(Slide 1)> ②プロダクト体験(Slide 2)**。時間がなければ①だけでよい。
+**16:20を過ぎたら画像はあきらめる**(スライドは画像なしで完成する設計。発表準備を優先)。
 
 ---
 
-## 共通スタイル指定(全プロンプトの末尾に付いている)
+## ① ペイン写真(Slide 1・最優先)→ `slides/assets/pain.png`
 
-> flat modern illustration, dark navy background (#0c1030), neon gradient accents
-> (purple #7c5cff to cyan #2dd6c1), soft glow, minimal, no text, no letters, no logos, 16:9
+ユーザーの痛みが一目で伝わる写真。**保存するだけで自動表示される**(解釈本文の右横。無ければ勝手に消えるので設定不要)。
 
----
-
-## Slide 1用: テーマの抽象イメージ(assets/theme.png)
-
-テーマの解釈を1枚の抽象イメージにする。
+`{{ }}` を当日の内容で埋めて画像生成AI(ChatGPT / Gemini など)に貼る:
 
 ```
-「{{テーマ}}」というテーマを「{{解釈の一言(例: 書かれなかった言葉=行間)}}」と解釈した
-コンセプトを表す抽象的なイラストを描いてください。
-モチーフ: {{解釈を象徴する物・情景(例: チャット吹き出しの間に広がる空白)}}
-スタイル: flat modern illustration, dark navy background (#0c1030), neon gradient accents
-(purple #7c5cff to cyan #2dd6c1), soft glow, minimal, no text, no letters, no logos, 16:9
+次の場面のリアルな写真を生成してください。
+場面: {{ペインの瞬間(例: 深夜、スマホの短い返信を見つめて不安そうな若手社員)}}
+人物: 1人。表情に{{不安/焦り/孤独 など}}がにじんでいる。
+構図: 寄り気味、被写体に焦点、背景は暗くボケている。
+トーン: 映画のワンシーンのような青暗い照明(画面の光が顔を照らす等)。
+禁止: 文字・ロゴ・ウォーターマークを入れない。
+アスペクト比: 3:2
 ```
 
 英語版(英語指定の方が安定するツール用):
 
 ```
-An abstract conceptual illustration of "{{theme in English}}" interpreted as
-"{{interpretation in English}}". Motif: {{symbolic object or scene}}.
-Flat modern illustration, dark navy background (#0c1030), neon gradient accents
-(purple #7c5cff to cyan #2dd6c1), soft glow, minimal, no text, no letters, no logos, 16:9.
+A realistic cinematic photo. Scene: {{the pain moment}}.
+One person, expression of {{anxiety/frustration/loneliness}}.
+Close-up composition, subject in focus, dark blurred background.
+Moody blue-dark lighting, as if lit by a screen glow.
+No text, no logos, no watermark. Aspect ratio 3:2.
 ```
 
-## Slide 2用: プロダクトの体験イメージ(assets/product.png)
+記入例(リハーサル「余白」の場合):
 
-ユーザーがWOWを体験している瞬間を1枚にする。
+```
+次の場面のリアルな写真を生成してください。
+場面: 深夜のリビング、スマホに届いた「わかりました。」だけの返信を見つめて固まっている若手社員
+人物: 1人。表情に不安がにじんでいる。
+構図: 寄り気味、被写体に焦点、背景は暗くボケている。
+トーン: 映画のワンシーンのような青暗い照明(スマホの光が顔を照らしている)。
+禁止: 文字・ロゴ・ウォーターマークを入れない。
+アスペクト比: 3:2
+```
+
+## ② プロダクト体験イメージ(Slide 2・任意)→ `slides/assets/product.png`
+
+保存後、`slides.html` の Slide 2 内コメント `<!-- AI画像(任意): ... -->` を外す。
 
 ```
 「{{プロダクト名}}」を使う人のイラストを描いてください。
-場面: {{WOW MOMENTの情景(例: スマホ画面に相手の内心が浮かび上がり、驚いている人)}}
+場面: {{WOW MOMENTの情景}}
 人物は1人、表情は{{驚き/安心/発見 など}}。
 スタイル: flat modern illustration, dark navy background (#0c1030), neon gradient accents
 (purple #7c5cff to cyan #2dd6c1), soft glow, minimal, no text, no letters, no logos, 16:9
 ```
 
-英語版:
-
-```
-An illustration of one person experiencing "{{product concept in English}}".
-Scene: {{the WOW moment}}. Single person, expression of {{surprise/relief/discovery}}.
-Flat modern illustration, dark navy background (#0c1030), neon gradient accents
-(purple #7c5cff to cyan #2dd6c1), soft glow, minimal, no text, no letters, no logos, 16:9.
-```
-
 ---
 
-## 記入例(2026-08-28リハーサル「余白」→そっけなさプレビューの場合)
+## 共通ルール
 
-```
-「余白」というテーマを「書かれなかった言葉=行間」と解釈したコンセプトを表す
-抽象的なイラストを描いてください。
-モチーフ: 短いチャット吹き出しの下に、受信者の不安が霧のように広がっていく空白
-スタイル: flat modern illustration, dark navy background (#0c1030), neon gradient accents
-(purple #7c5cff to cyan #2dd6c1), soft glow, minimal, no text, no letters, no logos, 16:9
-```
+- **画像内に文字を入れない**(AI画像の文字は崩れる。文字はスライド側で出す)
+- ペイン写真は「写真調」、プロダクト画像は「イラスト調」— 役割で描き分けている(痛み=現実感、未来=世界観)
+- 保存先はどちらも `slides/assets/`。ファイル名は上記の通り固定
