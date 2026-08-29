@@ -92,9 +92,10 @@
   .footer .pg { font-size:12px; font-weight:800; color:#c9bcff; }
 
   /* ペイン写真(Slide1): assets/pain.png があれば右側に出る */
-  .painrow { display:flex; gap:24px; align-items:stretch; }
+  .painrow { display:flex; gap:26px; align-items:stretch; flex:1; min-height:0; }
   .paintext { flex:1; min-width:0; display:flex; flex-direction:column; gap:14px; }
-  .pain-photo { width:300px; max-height:215px; align-self:center; object-fit:cover; border-radius:16px; border:1px solid var(--line); transform:rotate(1.4deg); box-shadow:0 12px 32px rgba(0,0,0,.45); }
+  .paintext .mini { margin-top:auto; }
+  .pain-photo { width:440px; align-self:stretch; height:auto; min-height:0; object-fit:cover; border-radius:18px; border:1px solid var(--line); transform:rotate(0.8deg); box-shadow:0 14px 36px rgba(0,0,0,.5); }
 
   /* AI生成画像スロット(任意)。無くてもレイアウトは完結する */
   .ai-hero { position:absolute; right:64px; top:76px; width:300px; border-radius:16px; border:1px solid var(--line); opacity:.95; }
@@ -132,14 +133,14 @@
     <div class="paintext">
       <p class="lead">__INTERPRETATION_FULL__<!-- 解釈の中身。テーマが現実のどんな現象として現れているか --></p>
       <div class="quote">__PHENOMENON__<!-- その現象が起きる具体的な日常の瞬間。誰が・いつ・どこで --></div>
+      <div class="mini stack">
+        <span class="mini-t">捨てた解釈</span>
+        <span class="mini-i"><b>① __OTHER_OPTION_1__</b> __OTHER_OPTION_1_DESC__<!-- どんなアイデアだったか一言 --> <span class="cut">✂ __WHY_CUT_1__</span><!-- 捨てた理由 --></span>
+        <span class="mini-i"><b>② __OTHER_OPTION_2__</b> __OTHER_OPTION_2_DESC__<!-- どんなアイデアだったか一言 --> <span class="cut">✂ __WHY_CUT_2__</span><!-- 捨てた理由 --></span>
+      </div>
     </div>
     <!-- ペイン写真: slides/assets/pain.png を置くと自動で表示される(無ければ消える) -->
     <img class="pain-photo" src="assets/pain.png" alt="" onerror="this.remove()">
-  </div>
-  <div class="mini stack">
-    <span class="mini-t">捨てた解釈</span>
-    <span class="mini-i"><b>① __OTHER_OPTION_1__</b> __OTHER_OPTION_1_DESC__<!-- どんなアイデアだったか一言 --> <span class="cut">✂ __WHY_CUT_1__</span><!-- 捨てた理由 --></span>
-    <span class="mini-i"><b>② __OTHER_OPTION_2__</b> __OTHER_OPTION_2_DESC__<!-- どんなアイデアだったか一言 --> <span class="cut">✂ __WHY_CUT_2__</span><!-- 捨てた理由 --></span>
   </div>
   <div class="big"><span class="lbl">1 USER / 1 PROBLEM</span>__USER__は、__SITUATION__とき、<b>__PROBLEM__</b>に困っている。<!-- SITUATIONは「〜する」で終える --></div>
   <div class="footer"><span>__PRODUCT__ — 札幌すごいAIハッカソン 2026夏</span><span class="pg">01</span></div>
