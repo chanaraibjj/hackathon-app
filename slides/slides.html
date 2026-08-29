@@ -23,68 +23,76 @@
 
   .slide {
     width:1280px; height:720px; margin:24px auto;
-    padding:44px 72px 58px; position:relative; overflow:hidden;
-    display:flex; flex-direction:column;
+    padding:40px 72px 56px; position:relative; overflow:hidden;
+    display:flex; flex-direction:column; gap:18px;
     background:
-      radial-gradient(520px 340px at 88% -8%, rgba(124,92,255,.32), transparent 60%),
-      radial-gradient(460px 320px at -6% 104%, rgba(45,214,193,.20), transparent 60%),
-      radial-gradient(320px 240px at 104% 82%, rgba(255,95,162,.16), transparent 60%),
+      radial-gradient(560px 360px at 90% -10%, rgba(124,92,255,.35), transparent 60%),
+      radial-gradient(480px 340px at -8% 106%, rgba(45,214,193,.22), transparent 60%),
+      radial-gradient(340px 260px at 106% 84%, rgba(255,95,162,.18), transparent 60%),
       var(--bg);
     box-shadow:0 4px 24px rgba(0,0,0,.5);
     -webkit-print-color-adjust:exact; print-color-adjust:exact;
   }
 
-  .kicker { display:inline-flex; align-self:flex-start; align-items:center; gap:8px; font-size:13px; font-weight:800; letter-spacing:.16em; color:#c9bcff; background:rgba(124,92,255,.18); border:1px solid rgba(124,92,255,.45); border-radius:999px; padding:6px 16px; margin-bottom:14px; }
+  .kicker { display:inline-flex; align-self:flex-start; align-items:center; gap:8px; font-size:13px; font-weight:800; letter-spacing:.16em; color:#c9bcff; background:rgba(124,92,255,.18); border:1px solid rgba(124,92,255,.45); border-radius:999px; padding:6px 16px; }
   .slide:nth-of-type(1) .kicker::before { content:"🧭"; }
   .slide:nth-of-type(2) .kicker::before { content:"💡"; }
   .slide:nth-of-type(3) .kicker::before { content:"🚀"; }
 
-  h2.msg { font-size:29px; font-weight:800; color:#fff; line-height:1.36; padding-bottom:14px; margin-bottom:18px; position:relative; }
-  h2.msg::after { content:""; position:absolute; left:0; bottom:0; width:220px; height:5px; border-radius:99px; background:linear-gradient(90deg, var(--vio), var(--cyan)); }
-  h2.msg .sub { display:block; font-size:16.5px; font-weight:600; color:var(--mute); margin-top:7px; line-height:1.5; }
+  /* ピッチの主役: 巨大な一言 */
+  .hero { display:flex; flex-direction:column; gap:8px; }
+  .eyebrow { font-size:15px; font-weight:700; letter-spacing:.08em; color:var(--mute); }
+  h2.punch { font-size:44px; font-weight:900; line-height:1.22; color:#fff; letter-spacing:.01em; }
+  h2.punch .grad, .punch b { background:linear-gradient(92deg, #b9a8ff 10%, var(--cyan) 90%); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .why { font-size:14.5px; color:var(--mute); line-height:1.5; }
 
-  .content { flex:1; display:flex; flex-direction:column; gap:16px; min-height:0; }
-  .cols { display:flex; gap:26px; flex:1; min-height:0; }
-  .col { flex:1; min-width:0; display:flex; flex-direction:column; gap:14px; }
-  .col.main { flex:1.6; }
+  .lead { font-size:19px; font-weight:600; line-height:1.62; color:#dfe4ff; max-width:1050px; }
+  .lead b { color:var(--amber); }
 
-  .footer { position:absolute; left:72px; right:72px; bottom:18px; display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--line); padding-top:8px; font-size:11px; color:#7d86ad; }
-  .footer .pg { font-size:12px; font-weight:800; color:#c9bcff; }
+  /* 日常の瞬間: 引用カード */
+  .quote { position:relative; background:rgba(255,255,255,.05); border:1px solid var(--line); border-radius:16px; padding:16px 22px 16px 56px; font-size:16px; line-height:1.6; color:#cfd6f2; }
+  .quote::before { content:"「"; position:absolute; left:16px; top:6px; font-size:34px; font-weight:900; background:linear-gradient(180deg, var(--vio), var(--cyan)); -webkit-background-clip:text; background-clip:text; color:transparent; }
 
-  .box { border:1px solid var(--line); border-radius:16px; padding:20px 24px; background:rgba(255,255,255,.045); }
-  .box h3 { font-size:19px; color:#c9bcff; margin-bottom:10px; }
-  .box p, .box li { font-size:17px; line-height:1.72; color:#dfe4ff; }
-  .box.hl { border:1.5px solid transparent; background:linear-gradient(var(--bg2), var(--bg2)) padding-box, linear-gradient(90deg, var(--vio), var(--cyan)) border-box; }
-  .box.grow { flex:1; display:flex; flex-direction:column; justify-content:flex-start; }
+  /* 脇役の小ネタ(捨てた解釈・完成度など) */
+  .mini { display:flex; flex-wrap:wrap; gap:6px 22px; align-items:baseline; font-size:13px; color:var(--mute); line-height:1.5; }
+  .mini .mini-t { font-size:11px; font-weight:900; letter-spacing:.1em; color:#0c1030; background:var(--amber); border-radius:5px; padding:2px 8px; transform:rotate(-1.2deg); }
+  .mini .mini-i b { color:#dfe4ff; font-weight:700; }
+  .mini .ok { color:var(--cyan); font-weight:800; }
+  .mini .cut { color:var(--pink); font-weight:800; }
 
-  .lead { font-size:21px; font-weight:700; line-height:1.6; color:#fff; }
-  .lead b { background:linear-gradient(90deg, #b9a8ff, var(--cyan)); -webkit-background-clip:text; background-clip:text; color:transparent; }
-  .body { font-size:17px; line-height:1.72; color:#cfd6f2; }
-  .note { font-size:15px; color:var(--mute); line-height:1.55; }
-
-  .sublist { display:flex; flex-direction:column; }
-  .sublist .item { padding:12px 2px; border-top:1px solid var(--line); }
-  .sublist .item:first-child { border-top:none; padding-top:2px; }
-  .sublist .t { font-size:17px; font-weight:700; color:#fff; margin-bottom:3px; }
-  .sublist .d { font-size:15px; color:var(--mute); line-height:1.55; }
-
+  /* 決めの帯 */
   .big { background:linear-gradient(115deg, #4a33d8, #7c5cff 55%, #2dd6c1 130%); color:#fff; border-radius:16px; padding:18px 26px; font-size:21px; font-weight:700; line-height:1.55; margin-top:auto; box-shadow:0 8px 28px rgba(124,92,255,.35); }
   .big .lbl { color:#0c1030; font-size:12px; font-weight:900; letter-spacing:.12em; display:inline-block; background:var(--amber); border-radius:6px; padding:3px 10px; margin-bottom:9px; transform:rotate(-1.2deg); }
   .big b, .big strong { color:var(--amber); font-weight:800; }
-  .big.sm { font-size:19px; }
 
+  /* Slide2: 価値カード+脇の2点 */
+  .duo { display:flex; gap:22px; flex:1; min-height:0; }
+  .main-card { flex:1.5; border:1.5px solid transparent; border-radius:18px; padding:22px 26px; background:linear-gradient(var(--bg2), var(--bg2)) padding-box, linear-gradient(90deg, var(--vio), var(--cyan)) border-box; display:flex; flex-direction:column; gap:10px; }
+  .main-card h3 { font-size:15px; font-weight:800; letter-spacing:.06em; color:#c9bcff; }
+  .main-card .value { font-size:21px; font-weight:800; line-height:1.55; color:#fff; }
+  .main-card .sub-p { font-size:14.5px; color:var(--mute); line-height:1.6; margin-top:auto; }
+  .side { flex:1; display:flex; flex-direction:column; gap:12px; min-width:0; }
+  .side-item { background:rgba(255,255,255,.05); border:1px solid var(--line); border-radius:14px; padding:13px 16px; }
+  .side-item .tag { display:inline-block; font-size:11px; font-weight:900; letter-spacing:.08em; color:#0c1030; background:var(--amber); border-radius:5px; padding:2px 8px; margin-bottom:6px; transform:rotate(-1.2deg); }
+  .side-item p { font-size:14px; line-height:1.6; color:#cfd6f2; }
+
+  /* Slide3: デモの流れ */
   .flow { display:flex; gap:12px; align-items:stretch; }
-  .flow .step { flex:1; background:rgba(255,255,255,.05); border:1px solid var(--line); color:#fff; border-radius:16px; padding:16px 16px 14px; }
+  .flow .step { flex:1; background:rgba(255,255,255,.05); border:1px solid var(--line); border-radius:16px; padding:16px 16px 14px; }
   .flow .step .ph { display:inline-block; font-size:12px; font-weight:800; letter-spacing:.06em; color:#c9bcff; background:rgba(124,92,255,.18); border-radius:6px; padding:2px 8px; margin-bottom:8px; }
-  .flow .step h4 { font-size:18px; margin-bottom:9px; color:#fff; }
-  .flow .step p { font-size:16px; line-height:1.56; color:#cfd6f2; }
+  .flow .step h4 { font-size:19px; margin-bottom:8px; color:#fff; }
+  .flow .step p { font-size:14px; line-height:1.6; color:#cfd6f2; }
   .flow .step.wow { background:linear-gradient(135deg, rgba(124,92,255,.40), rgba(255,95,162,.25)); border:1px solid rgba(255,195,92,.7); box-shadow:0 0 24px rgba(124,92,255,.45); }
   .flow .step.wow .ph { background:var(--amber); color:#0c1030; }
   .flow .step.wow h4 { color:var(--amber); }
   .arrow { align-self:center; font-weight:800; font-size:22px; background:linear-gradient(90deg, var(--vio), var(--cyan)); -webkit-background-clip:text; background-clip:text; color:transparent; }
 
+  .footer { position:absolute; left:72px; right:72px; bottom:16px; display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--line); padding-top:8px; font-size:11px; color:#7d86ad; }
+  .footer .pg { font-size:12px; font-weight:800; color:#c9bcff; }
+
   /* AI生成画像スロット(任意)。無くてもレイアウトは完結する */
-  .ai-visual { width:100%; max-height:190px; object-fit:cover; border-radius:14px; border:1px solid var(--line); }
+  .ai-hero { position:absolute; right:64px; top:76px; width:300px; border-radius:16px; border:1px solid var(--line); opacity:.95; }
+  .ai-visual { width:100%; max-height:170px; object-fit:cover; border-radius:14px; border:1px solid var(--line); }
 
   @media print {
     html, body { background:#fff; }
@@ -93,9 +101,8 @@
   }
   @page { size:1280px 720px; margin:0; }
 
-  /* 本文スライド共通: 下端中央ロゴ(白チップ載せ) */
   .slide::after {
-    content:""; position:absolute; left:50%; bottom:14px; transform:translateX(-50%);
+    content:""; position:absolute; left:50%; bottom:12px; transform:translateX(-50%);
     width:100px; height:22px;
     background-color:rgba(255,255,255,.95); border-radius:6px;
     background-image:var(--logo); background-repeat:no-repeat;
@@ -110,77 +117,66 @@
 <!-- ============ Slide 1: テーマ解釈 / 課題 ============ -->
 <section class="slide">
   <div class="kicker">01 INTERPRETATION — テーマ解釈 / 課題</div>
-  <h2 class="msg">テーマ「__THEME__」を、「__INTERPRETATION_SHORT__」と捉えた<span class="sub">__WHY_ONELINE__<!-- なぜこの解釈を選んだか、一文 --></span></h2>
-  <div class="content">
-    <div class="cols">
-      <div class="col main">
-        <p class="lead">__INTERPRETATION_FULL__<!-- 解釈の中身。テーマが現実世界のどんな現象として現れているか --></p>
-        <p class="body">__PHENOMENON__<!-- その現象が起きる具体的な日常の瞬間の描写。誰が・いつ・どこで --></p>
-      </div>
-      <div class="col">
-        <!-- AI画像(任意): <img class="ai-visual" src="assets/theme.png" alt=""> -->
-        <div class="sublist">
-          <div class="item"><div class="t">検討して捨てた解釈①: __OTHER_OPTION_1__</div><div class="d">__WHY_CUT_1__<!-- 捨てた理由 --></div></div>
-          <div class="item"><div class="t">検討して捨てた解釈②: __OTHER_OPTION_2__</div><div class="d">__WHY_CUT_2__<!-- 捨てた理由 --></div></div>
-        </div>
-      </div>
-    </div>
-    <div class="big"><span class="lbl">1 USER / 1 PROBLEM</span>__USER__は、__SITUATION__のとき、<b>__PROBLEM__</b>に困っている。</div>
+  <!-- AI画像(任意): <img class="ai-hero" src="assets/theme.png" alt=""> -->
+  <div class="hero">
+    <p class="eyebrow">テーマ「__THEME__」を、こう捉えた</p>
+    <h2 class="punch"><span class="grad">「__INTERPRETATION_SHORT__」</span></h2>
+    <p class="why">__WHY_ONELINE__<!-- なぜこの解釈を選んだか、一文 --></p>
   </div>
+  <p class="lead">__INTERPRETATION_FULL__<!-- 解釈の中身。テーマが現実のどんな現象として現れているか --></p>
+  <div class="quote">__PHENOMENON__<!-- その現象が起きる具体的な日常の瞬間。誰が・いつ・どこで --></div>
+  <div class="mini">
+    <span class="mini-t">捨てた解釈</span>
+    <span class="mini-i"><b>① __OTHER_OPTION_1__</b> — __WHY_CUT_1__<!-- 捨てた理由 --></span>
+    <span class="mini-i"><b>② __OTHER_OPTION_2__</b> — __WHY_CUT_2__<!-- 捨てた理由 --></span>
+  </div>
+  <div class="big"><span class="lbl">1 USER / 1 PROBLEM</span>__USER__は、__SITUATION__とき、<b>__PROBLEM__</b>に困っている。<!-- SITUATIONは「〜する」で終える --></div>
   <div class="footer"><span>__PRODUCT__ — 札幌すごいAIハッカソン 2026夏</span><span class="pg">01</span></div>
 </section>
 
 <!-- ============ Slide 2: アイデア / 価値 ============ -->
 <section class="slide">
   <div class="kicker">02 PRODUCT — アイデア / 価値</div>
-  <h2 class="msg">__PRODUCT__ — __ONE_LINER__<!-- 一言コンセプトを主張文で --><span class="sub">__CORE_EXPERIENCE__<!-- 届ける中心体験を一文で --></span></h2>
-  <div class="content">
-    <div class="cols">
-      <div class="col main">
-        <div class="box hl grow">
-          <h3>__USER__にとっての価値</h3>
-          <p>__VALUE__<!-- この体験で何が嬉しいか。ビフォー→アフターが分かるように --></p>
-        </div>
-      </div>
-      <div class="col">
-        <!-- AI画像(任意): <img class="ai-visual" src="assets/product.png" alt=""> -->
-        <div class="sublist">
-          <div class="item"><div class="t">他と違うポイント</div><div class="d">__DIFFERENCE__</div></div>
-          <div class="item"><div class="t">なぜこれが成立するか</div><div class="d">__WHY_IT_WORKS__</div></div>
-        </div>
-      </div>
-    </div>
-    <div class="big"><span class="lbl">WOW MOMENT</span>__WOW_SETUP__した瞬間、<b>__WOW_MOMENT__</b>。</div>
+  <div class="hero">
+    <p class="eyebrow">つくったもの</p>
+    <h2 class="punch">__PRODUCT__ <span class="grad">— __ONE_LINER__</span><!-- 一言コンセプトを主張文で --></h2>
   </div>
+  <div class="duo">
+    <div class="main-card">
+      <h3>__USER__にとっての価値</h3>
+      <p class="value">__VALUE__<!-- 何が嬉しいか。ビフォー→アフターで --></p>
+      <p class="sub-p">体験: __CORE_EXPERIENCE__<!-- 届ける中心体験を一文で --></p>
+    </div>
+    <div class="side">
+      <!-- AI画像(任意): <img class="ai-visual" src="assets/product.png" alt=""> -->
+      <div class="side-item"><span class="tag">他と違う</span><p>__DIFFERENCE__</p></div>
+      <div class="side-item"><span class="tag">成立する理由</span><p>__WHY_IT_WORKS__</p></div>
+    </div>
+  </div>
+  <div class="big"><span class="lbl">WOW MOMENT</span>__WOW_SETUP__した瞬間、<b>__WOW_MOMENT__</b>。</div>
   <div class="footer"><span>__PRODUCT__ — 札幌すごいAIハッカソン 2026夏</span><span class="pg">02</span></div>
 </section>
 
 <!-- ============ Slide 3: 体験 / デモ ============ -->
 <section class="slide">
   <div class="kicker">03 DEMO — 体験 / デモ</div>
-  <h2 class="msg">__USER_STORY__<!-- 「◯◯が、◯◯する」をユーザーストーリーとして主張文で --><span class="sub">ここからライブデモ(約__DEMO_SEC__秒) — __PUBLIC_URL__</span></h2>
-  <div class="content">
-    <div class="flow">
-      <div class="step"><div class="ph">STEP 1</div><h4>__STEP1_TITLE__</h4><p>__STEP1_DESC__</p></div>
-      <div class="arrow">→</div>
-      <div class="step"><div class="ph">STEP 2</div><h4>__STEP2_TITLE__</h4><p>__STEP2_DESC__</p></div>
-      <div class="arrow">→</div>
-      <div class="step"><div class="ph">STEP 3</div><h4>__STEP3_TITLE__</h4><p>__STEP3_DESC__</p></div>
-      <div class="arrow">→</div>
-      <div class="step wow"><div class="ph">STEP 4 — WOW</div><h4>__STEP4_TITLE__</h4><p>__STEP4_DESC__</p></div>
-    </div>
-    <div class="cols" style="flex:0 0 auto;">
-      <div class="col">
-        <div class="sublist">
-          <div class="item"><div class="t">現時点の完成度</div><div class="d">__CURRENT_STATUS__<!-- 正直に。動くもの/Dummyのもの/準備中のもの --></div></div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="sublist">
-          <div class="item"><div class="t">あえて削ったもの: __CUT__</div><div class="d">__WHY_CUT__<!-- CORE EXPERIENCE優先の判断として --></div></div>
-        </div>
-      </div>
-    </div>
+  <div class="hero">
+    <p class="eyebrow">ここからライブデモ(約__DEMO_SEC__秒)</p>
+    <h2 class="punch">__USER_STORY__<!-- 「◯◯が、◯◯する」を主張文で --></h2>
+    <p class="why">__PUBLIC_URL__</p>
+  </div>
+  <div class="flow">
+    <div class="step"><div class="ph">STEP 1</div><h4>__STEP1_TITLE__</h4><p>__STEP1_DESC__</p></div>
+    <div class="arrow">→</div>
+    <div class="step"><div class="ph">STEP 2</div><h4>__STEP2_TITLE__</h4><p>__STEP2_DESC__</p></div>
+    <div class="arrow">→</div>
+    <div class="step"><div class="ph">STEP 3</div><h4>__STEP3_TITLE__</h4><p>__STEP3_DESC__</p></div>
+    <div class="arrow">→</div>
+    <div class="step wow"><div class="ph">STEP 4 — WOW</div><h4>__STEP4_TITLE__</h4><p>__STEP4_DESC__</p></div>
+  </div>
+  <div class="mini" style="margin-top:auto;">
+    <span class="mini-i"><b class="ok">✅ 現時点の完成度</b> __CURRENT_STATUS__<!-- 正直に --></span>
+    <span class="mini-i"><b class="cut">✂️ あえて削った</b> __CUT__ — __WHY_CUT__<!-- CORE EXPERIENCE優先の判断として --></span>
   </div>
   <div class="footer"><span>__PRODUCT__ — 札幌すごいAIハッカソン 2026夏 / GitHub: __GITHUB_URL__</span><span class="pg">03</span></div>
 </section>

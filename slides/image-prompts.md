@@ -3,7 +3,8 @@
 使い方:
 1. `{{ }}` を当日の内容で埋めて、画像生成AI(ChatGPT / Gemini など)に貼る
 2. 生成画像を `slides/assets/theme.png` / `slides/assets/product.png` として保存
-3. `slides.html` 内のコメント `<!-- AI画像(任意): ... -->` を外す(Slide 1とSlide 2に1箇所ずつ)
+3. `slides.html` 内のコメント `<!-- AI画像(任意): ... -->` を外す
+   (Slide 1 = 右上に浮かぶ `ai-hero` / Slide 2 = 右カラム上の `ai-visual`)
 
 ルール:
 - **スライドは画像なしで完成している。16:20を過ぎたら画像はあきらめる**(発表準備を優先)
